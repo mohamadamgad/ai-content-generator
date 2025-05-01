@@ -7,9 +7,29 @@ export default function GeneratePage() {
   const [tone, setTone] = useState('Formal');
   const [length, setLength] = useState('Medium');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log({ topic, tone, length });
+    setLoading(true);
+    setResult('');
+
+    try {
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic, tone, length }),
+      });
+
+      const data = await res.json();
+      setResult(data.content);
+    } catch (err) {
+      console.error(err);
+      alert('Something went wrong.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -72,6 +92,13 @@ export default function GeneratePage() {
           Generate
         </button>
       </form>
+      {loading && <p className="mt-6 text-blue-500">Generating...</p>}
+
+      {result && (
+        <div className="mt-6 p-4 border border-gray-300 rounded bg-gray-50 whitespace-pre-wrap">
+          {result}
+        </div>
+      )}
     </main>
   );
 }
