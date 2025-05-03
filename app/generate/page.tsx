@@ -87,18 +87,23 @@ export default function GeneratePage() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+          className={`w-full py-2 px-4 rounded text-white ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+            }`}
+          disabled={loading}
         >
-          Generate
+          {loading ? 'Generating...' : 'Generate'}
         </button>
       </form>
-      {loading && <p className="mt-6 text-blue-500">Generating...</p>}
+      {loading && (
+        <div className="mt-6 text-blue-600 text-sm">Generating content, please wait...</div>
+      )}
 
       {result && (
-        <div className="mt-6 p-4 border border-gray-300 rounded bg-gray-50 whitespace-pre-wrap">
+        <div className="mt-6 p-4 border rounded bg-white shadow text-gray-800 leading-relaxed whitespace-pre-wrap">
           {result}
         </div>
       )}
+
     </main>
   );
 }
