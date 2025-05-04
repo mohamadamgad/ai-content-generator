@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { prisma } from '../../../src/lib/prisma';
 
 export async function POST(req: Request) {
   const { topic, tone, length } = await req.json();
@@ -24,6 +25,15 @@ export async function POST(req: Request) {
     
     const data = await response.json();
     const content = data.choices?.[0]?.message?.content;
+
+    await prisma.generation.create({
+      data: {
+        topic,
+        tone,
+        length,
+        content,
+      },
+    });    
 
     return NextResponse.json({ content });
   } catch (error) {
