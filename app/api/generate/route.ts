@@ -4,8 +4,16 @@ import { prisma } from '../../../src/lib/prisma';
 export async function POST(req: Request) {
   const { topic, tone, length } = await req.json();
 
-  const prompt = `Write a ${length.toLowerCase()} blog post in a ${tone.toLowerCase()} tone about "${topic}".`;
-  console.log('API Key:', process.env.OPENAI_API_KEY?.slice(0, 6));
+  const prompt = `You are an expert content writer.
+
+    Write a ${length.toLowerCase()} blog post in a ${tone.toLowerCase()} tone.
+
+    Topic: "${topic}"
+
+    Start with a strong introduction and finish with a conclusion.
+    Format the response in clear paragraphs.
+`;
+
 
 
   try {
@@ -22,7 +30,7 @@ export async function POST(req: Request) {
         max_tokens: 800,
       }),
     });
-    
+
     const data = await response.json();
     const content = data.choices?.[0]?.message?.content;
 
@@ -33,7 +41,7 @@ export async function POST(req: Request) {
         length,
         content,
       },
-    });    
+    });
 
     return NextResponse.json({ content });
   } catch (error) {

@@ -48,6 +48,7 @@ export default function GeneratePage() {
             onChange={(e) => setTopic(e.target.value)}
             className="mt-1 block w-full rounded-md border border-gray-300 p-2"
             placeholder="e.g. Time management tips"
+            maxLength={100}
             required
           />
         </div>
@@ -93,6 +94,10 @@ export default function GeneratePage() {
         >
           {loading ? 'Generating...' : 'Generate'}
         </button>
+        {loading && (
+          <div className="text-sm text-gray-500 mt-2 animate-pulse">Talking to GPT...</div>
+        )}
+
       </form>
       {loading && (
         <div className="mt-6 text-blue-600 text-sm">Generating content, please wait...</div>
