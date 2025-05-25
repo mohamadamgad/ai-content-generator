@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-white text-gray-900">
         <header className="w-full bg-blue-600 text-white px-4 py-3 shadow">
-          <nav className="max-w-4xl mx-auto flex justify-between items-center">
+        <nav className="max-w-4xl mx-auto flex flex-wrap justify-between items-center gap-4">
             <Link href="/" className="text-lg font-semibold hover:underline">
               AI Generator
             </Link>

@@ -36,7 +36,7 @@ export default function GeneratePage() {
     <main className="flex min-h-screen flex-col items-center justify-center p-6 bg-white">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">AI Content Generator</h1>
 
-      <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
+      <form onSubmit={handleSubmit} className="w-full space-y-4 px-2 sm:px-0">
         <div>
           <label htmlFor="topic" className="block text-sm font-medium text-gray-700">
             Topic

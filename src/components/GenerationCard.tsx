@@ -28,7 +28,10 @@ export function GenerationCard({ generation }: Props) {
       <p className="text-sm text-gray-400 mb-2">
         Generated on {new Date(generation.createdAt).toLocaleString()}
       </p>
-      <div className="whitespace-pre-wrap text-gray-800 font-mono">{generation.content}</div>
+      <div className="whitespace-pre-wrap break-words text-gray-800 font-mono text-sm">
+        {generation.content}
+      </div>
+
     </li>
   );
 }
